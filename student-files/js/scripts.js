@@ -66,9 +66,6 @@ const closeBtn = document.getElementById("modal-close-btn");
 
 function displayModal (data) {
     const modalContainer = `
-    <div class="modal-info-container">
-    <img class="modal-img" src=${data.picture.thumbnail} alt="profile picture">
-    
     <div class="modal-container">
                 <div class="modal">
                     <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
