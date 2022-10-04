@@ -73,31 +73,30 @@ function displayModal (data) {
                         <img class="modal-img" src=${data.picture.thumbnail} alt="profile picture">
                         <h3 id="name" class="modal-name cap">${data.name.first} ${data.name.last}</h3>
                         <p class="modal-text">${data.email}</p>
-                        <p class="modal-text cap">${data.location.city}, ${data[i].location.state}</p>
+                        <p class="modal-text cap">${data.location.city}, ${data.location.state}</p>
                         <hr>
                         <p class="modal-text">(555) 555-5555</p>
-                        <p class="modal-text">${data.locatioin.street.number} ${data.location,street.name}, ${data.state}, ${data.postCode}</p>
-                        <p class="modal-text">${data.birthday(data.dob.date)}</p>
+                        <p class="modal-text">${data.location.street.number} ${data.location.street.name}, ${data.state}, ${data.postCode}</p>
+                        <p class="modal-text">${data.dob.date}</p>
                         </div>
                     </div>
                 </div>`;
-      closeBtn.addEventListener('click', e => {
-        if (e.target.closest(closeBtn)) {
-          modal.remove();
-          }});
-     
+
+    closeBtn.addEventListener('click', e => {
+      if (e.target.class === 'modal-close-btn') {
+       modal.remove();
+     }});            
 
 };
 
 gallery.addEventListener('click', e => {
 if (e.target !== gallery) {
     let card = e.target.closest('.card');
-    card = card.children[1].children[0].textContent;
+    if (card !== null){
+    let employeeCard = card.children[1].children[0].textContent;
     for (let i = 0; i < employeeData.length; i++ ) {
-        if (card === `${data.name.first} ${data.name.last}`){
-            displayModal(data[i]);
+        if (employeeData[i].name === employeeCard){
+            displayModal(employeeData[i]);
         }
-    }
-}})
-
-
+}}
+}});
