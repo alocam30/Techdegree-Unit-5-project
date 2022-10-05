@@ -14,7 +14,7 @@ galleryContainer.innerHTML = `
 
 
 // FETCH is requesting data from the Random User API
-fetch('https://randomuser.me/api/?results=12')
+fetch('//https://randomuser.me/api/?results=12')
     .then(response => response.json())
     .then(data => {
         employeeData = data.results
@@ -28,11 +28,11 @@ fetch('https://randomuser.me/api/?results=12')
 function generateHTML(data) {
     for (let i = 0; i < data.length; i++) {
         const cardDiv = `
-        <div class="card">
-                    <div class="card-img-container">
+        <div class="card c" data-index='${i}'>
+                    <div class="card-img-container c">
                         <img class="card-img" src=${data[i].picture.thumbnail} alt="profile picture">
                     </div>
-                    <div class="card-info-container">
+                    <div class="card-info-container c">
                         <h3 id="name" class="card-name cap">${data[i].name.first} ${data[i].name.last} </h3>
                         <p class="card-text">${data[i].email}</p>
                         <p class="card-text cap">${data[i].location.city}, ${data[i].location.state}</p>
@@ -76,45 +76,28 @@ function displayModal (data) {
                         <p class="modal-text cap">${data.location.city}, ${data.location.state}</p>
                         <hr>
                         <p class="modal-text">${data.cell}</p>
-                        <p class="modal-text">${data.location.street.number} ${data.location.street.name}, ${data.state}, ${data.postCode}</p>
+                        <p class="modal-text">${data.location.street.number} ${data.location.street.name}, ${data.location.city}, ${data.location.state}, ${data.location.postCode}</p>
                         <p class="modal-text">${data.dob.date}</p>
                         </div>
                     </div>
                 </div>`;
 
-    gallery.insertAdjacentHTML('beforeend', modalContainer);         
-
-    closeBtn.addEventListener('click', e => {
-      if (e.target.class === 'modal-close-btn') {
-       modal.remove();
-     }});            
+    gallery.insertAdjacentHTML('beforeend', modalContainer);                   
 
 };
 
 
 
 gallery.addEventListener('click', e => {
-    let card = document.querySelector('.card')
-
-    if (e.target.value === card) {
-        displayModal(employeeData).style.display = 'block';
-    } else {
-        displayModal(employeeData).style.display = 'none';
-    
+    if (e.target !== gallery && e.target.parentNode.classList.contains('c') ) {
+    const card = e.target.closest('.card');
+    const index = card.getAttribute('data-index');
+        displayModal(employeeData[index]);
+    } else if (e.target.classList.contains('modal-close-btn') || e.target.tagName === 'STRONG'){
+        gallery.removeChild(gallery.lastElementChild);
     }
 });
 
 
-
-
-//     if(card !== null){
-//         let employeeCard = card.children[1].children[0].textContent;
-//         for (let i = 0; i < employeeData.length; i++ ) {
-//                     if (employeeData[i].name === employeeCard){
-//                         displayModal(employeeData[i]);
-//                     }
-
-//     }
-// }
 
 
