@@ -59,7 +59,7 @@ searchBar.addEventListener('keyup', e => {
 
                                                                                                                 
 //MODAL 
-//source: https://sabe.io/tutorials/how-to-create-modal-popup-box
+
 const modal = document.querySelector(".modal-container");
 const closeBtn = document.getElementById("modal-close-btn");
 
@@ -75,12 +75,14 @@ function displayModal (data) {
                         <p class="modal-text">${data.email}</p>
                         <p class="modal-text cap">${data.location.city}, ${data.location.state}</p>
                         <hr>
-                        <p class="modal-text">(555) 555-5555</p>
+                        <p class="modal-text">${data.cell}</p>
                         <p class="modal-text">${data.location.street.number} ${data.location.street.name}, ${data.state}, ${data.postCode}</p>
                         <p class="modal-text">${data.dob.date}</p>
                         </div>
                     </div>
                 </div>`;
+
+    gallery.insertAdjacentHTML('beforeend', modalContainer);         
 
     closeBtn.addEventListener('click', e => {
       if (e.target.class === 'modal-close-btn') {
@@ -89,14 +91,30 @@ function displayModal (data) {
 
 };
 
+
+
 gallery.addEventListener('click', e => {
-if (e.target !== gallery) {
-    let card = e.target.closest('.card');
-    if (card !== null){
-    let employeeCard = card.children[1].children[0].textContent;
-    for (let i = 0; i < employeeData.length; i++ ) {
-        if (employeeData[i].name === employeeCard){
-            displayModal(employeeData[i]);
-        }
-}}
-}});
+    let card = document.querySelector('.card')
+
+    if (e.target.value === card) {
+        displayModal(employeeData).style.display = 'block';
+    } else {
+        displayModal(employeeData).style.display = 'none';
+    
+    }
+});
+
+
+
+
+//     if(card !== null){
+//         let employeeCard = card.children[1].children[0].textContent;
+//         for (let i = 0; i < employeeData.length; i++ ) {
+//                     if (employeeData[i].name === employeeCard){
+//                         displayModal(employeeData[i]);
+//                     }
+
+//     }
+// }
+
+
