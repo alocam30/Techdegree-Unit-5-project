@@ -14,7 +14,7 @@ galleryContainer.innerHTML = `
 
 
 // FETCH is requesting data from the Random User API
-fetch('//https://randomuser.me/api/?results=12')
+fetch('https://randomuser.me/api/?results=12')
     .then(response => response.json())
     .then(data => {
         employeeData = data.results
